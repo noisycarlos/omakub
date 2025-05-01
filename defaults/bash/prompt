@@ -2,6 +2,21 @@
 force_color_prompt=yes
 color_prompt=yes
 
-# Simple prompt with path in the window/pane title and caret for typing line
-PS1=$'\uf0a9 '
-PS1="\[\e]0;\w\a\]$PS1"
+shorten_path() {
+    local max_length=25  # Set the maximum length for the path
+    local dir=$(pwd -P | sed "s|$HOME|~|g")
+    # Replace home directory with ~
+    local directories=$(echo "$dir" | tr '/' '\n')
+    local first_dir=$(echo "$directories" | head -n 2 | tr '\n' '/')
+    local last_dir=$(echo "$directories" | tail -n 1)
+    
+    if [ ${#dir} -gt $max_length ]; then
+        local shortened="${first_dir}.../${last_dir}"
+        echo "$shortened"
+    else
+        echo "$dir"
+    fi
+}
+  # Set the prompt
+arrow=$'\uf0a9'
+PS1='[\u@\h:$(shorten_path)] ${arrow} '
