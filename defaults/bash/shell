@@ -12,3 +12,5 @@ export PATH="./bin:$HOME/.local/bin:$HOME/.local/share/omakub/bin:$PATH"
 set +h
 
 export OMAKUB_PATH="/home/$USER/.local/share/omakub"
+
+# export LS_COLORS="ow=01;31:tw=01;31:ow=01;31:tw=01;31:$(echo $LS_COLORS)"
